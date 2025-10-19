@@ -37,7 +37,7 @@ const navigate=useNavigate();
               </p>
               <button
                 onClick={()=>{
-                    navigate("/")
+                    navigate("/auth")
                 }}
                 className=" flex items-center justify-center btn--start p-3 px-6 text-white bg-[#A1683B] hover:z-0 rounded-full relative "
               >
@@ -49,10 +49,10 @@ const navigate=useNavigate();
               {/* <img src={Img} alt='image_thumbnail' className='w-8/12 xm:hidden' />
                */}
              <div className=" xm:hidden xm:flex-row">
-                <Spline
+                {/* <Spline
                   scene="https://prod.spline.design/IzDBUKdMuk8WH22V/scene.splinecode"
                   width="500px"
-                />
+                /> */}
 </div>
             </div>
           </div>
