@@ -176,6 +176,30 @@ h1 {
   box-shadow: 40px 0 100px #394aaa, -40px 0 100px #963ab4;
 }
 
+.btn-login {
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+.btn-login:focus,
+.btn-login:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+.wrapper--card{
+  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+              0 32px 64px -48px rgba(0,0,0,0.5);
+}
+.header{
+  border-bottom: 1px solid #e6e6e6;
+}
+
 @keyframes hue-rotate {
   0% {
     filter: hue-rotate(0deg);
