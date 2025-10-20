@@ -11,18 +11,24 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import apiService from "./apiService/apiService.mjs";
 import { useAuth } from "./context/authContext/index.jsx";
 import { useUser } from "./context/userContext/index.jsx";
+// import axios from "axios";
 
 function App() {
   const { cookies, logout } = useAuth();
-  const { setUser } = useUser();
+  const { setUser,  } = useUser();
 
   async function getData() {
     try {
+      //Getting all the posts
+      // let res = await axios.get(`http://localhost:3000/api/posts`);
+      // setPost(res.data);
+
       if (cookies.token) {
         let res = await apiService.getUser(cookies.token);
 
         setUser(res);
       }
+      
       // console.log("see",res)
     } catch (err) {
       logout();
