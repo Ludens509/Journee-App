@@ -11,10 +11,17 @@ const Nav = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { logout } = useAuth();
-  const { user } = useUser();
+  const { logout ,cookies} = useAuth();
+  const { user ,setUser} = useUser();
 
   const navigate = useNavigate(); 
+  
+  //This effect allow to track auth status and clear user data on logout
+ useEffect(()=>{
+    if (!cookies?.token) {
+      setUser(null);
+    }
+ },[cookies?.token, setUser]);
 
   const handleScroll = () => {
     if (typeof window !== "undefined") {
@@ -42,6 +49,7 @@ const Nav = () => {
     logout();
     navigate("/");
     setIsMenuOpen(!isMenuOpen);
+
   };
 
   return (
@@ -114,7 +122,7 @@ const Nav = () => {
                               role="menuitem"
                               onClick={() => setIsMenuOpen(false)}
                             >
-                              My profile
+                              {user.username}'s Profile
                             </Link>
                             <Link
                               href="#data"
