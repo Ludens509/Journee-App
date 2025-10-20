@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/authContext/index.jsx";
+
 // import Loader from "../Loader";
 
 function LoginForm({ setNewUser }) {
@@ -35,7 +36,7 @@ function LoginForm({ setNewUser }) {
   };
   //Allow user to switch to register form
   const handleClick = () => {
-    setNewUser(true);
+    setNewUser((setNewUser) => !setNewUser);
   };
 
   return (
