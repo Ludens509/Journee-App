@@ -1,19 +1,6 @@
-import {useState,useCallback, memo} from "react";
+import { memo, useCallback, useState } from "react";
 import OptionsMenu from "../Popover/OptionMenu";
-import { HeartFilled,HeartOutline } from "./utils";
-import ImageTest from "../../assets/images/profile-Avatar.jpeg";
-// import PopoverCollection from "../Popover/PopoverCollection";
-import PopoverOptions from "../Popover/PopoverOptions";
-import { CgHeart } from "react-icons/cg";
-// import PropTypes from "prop-types";
-import { FcLike } from "react-icons/fc";
-
-
-
-  // function Like(status) {
-  //   const likeBtn = status ? <FcLike size={22} /> : <CgHeart size={22} />;
-  //   return likeBtn;
-  // }
+import { HeartFilled, HeartOutline } from "./utils";
 
 
 
@@ -26,15 +13,15 @@ import { FcLike } from "react-icons/fc";
           <h2 className="text-2xl sm:text-xl font-bold tracking-tight text-gray-900  mb-2">
             {item.title}
           </h2>
-          <p className="font-normal text-gray-600 dark:text-gray-400 text-sm leading-relaxed hidden sm:block line-clamp-3">
-            {item.description}
+          <p className="font-normal text-gray-900 dark:text-gray-400 text-sm leading-relaxed  sm:block line-clamp-3">
+            {item.content}
           </p>
         </header>
 
         {/* Footer Section */}
         <footer className="flex items-center justify-between py-3 border-t border-gray-200/50 dark:border-gray-700/50">
           <time className="text-sm text-gray-500 dark:text-gray-400">
-            {item.dateposted}
+            {item.createdAt.slice(0, 10)}
           </time>
 
           <div className="flex items-center gap-4">
@@ -61,7 +48,7 @@ import { FcLike } from "react-icons/fc";
         </footer>
 
         {/* Image Section */}
-        {item.image && (
+        {/* {item.image && (
           <div className="mt-4 rounded-lg overflow-hidden">
             <img
               src={item.image}
@@ -70,17 +57,17 @@ import { FcLike } from "react-icons/fc";
               loading="lazy"
             />
           </div>
-        )}
+        )} */}
       </article>
     );
   });
 
   // Main component
-  const CardPost = ({ data = [] }) => {
+  const CardPost = ({ data }) => {
     
     const [likedPosts, setLikedPosts] = useState({});
 
-    const handleLike = useCallback((id) => {
+    const handleLike = useCallback((id) => { //useCallback will return a memoized version of the callback that only changes if one of the inputs has changed.
         //prev is the previous like post state(current liked posts object)
       setLikedPosts((prev) => ({
         ...prev, //spread operator ,copy all existing liked posts
@@ -118,17 +105,6 @@ import { FcLike } from "react-icons/fc";
       </>
     );
   };
-  // CardPost.propTypes = {
-  //   data: PropTypes.arrayOf(
-  //     PropTypes.shape({
-  //       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  //       title: PropTypes.string,
-  //       description: PropTypes.string,
-  //       dateposted: PropTypes.string,
-  //       image: PropTypes.any,
-  //     })
-  //   ),
-  // };
 
 
 export default CardPost;
