@@ -125,12 +125,12 @@ const Nav = () => {
                               {user.username}'s Profile
                             </Link>
                             <Link
-                              href="#data"
+                              to="/posts"
                               className="block rounded-lg px-4 py-2 text-sm text-purple-900 hover:bg-[#d6bae4]/30 transition-colors"
                               role="menuitem"
                               onClick={() => setIsMenuOpen(false)}
                             >
-                              My data
+                             My  Posts
                             </Link>
                             <hr className="my-2 border-purple-200" />
                             <button
