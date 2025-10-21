@@ -133,13 +133,13 @@ h1 {
 }
 /*  */
 .gradient {
-  width: 100%;
+  /* width: 100%;
   height: 100vh;
   position: relative;
   inset: 0;
   mix-blend-mode: normal;
-  background-color: #d6bae4;
-  background-image: radial-gradient(#d6bae4, #ffffff 60%);
+  background-color: #d6bae4; */
+  background-image: radial-gradient(#f0f1ff, #ffffff 35%);
   /* radial-gradient(at 30% 21%, hsla(214, 62%, 64%, 1) 0px, transparent 50%), */
   /* radial-gradient(at 32% 8%, hsla(208, 50%, 90%, 1) 0px, transparent 50%), */
   /* radial-gradient( #d6bae4, transparent 80%); */
@@ -156,11 +156,10 @@ h1 {
   height: 100vh;
   position: relative;
   inset: 0;
-  mix-blend-mode: normal;
-  background-color: #d6bae4;
-  background-image: radial-gradient(#d6bae4, #ffffff 60%);
-
-  /* animation: hue-rotate 5s linear infinite; */
+  mix-blend-mode:multiply;
+  /* background-color: #d6bae4; */
+  /* background-image: radial-gradient(#d6bae4, #ffffff 20%); */
+/* animation: hue-rotate 5s linear infinite; */
 }
 
 .btn--start::after {
