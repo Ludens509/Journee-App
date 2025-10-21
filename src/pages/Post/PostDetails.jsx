@@ -1,62 +1,126 @@
-import {Avatar} from 'flowbite-react';
+import { Avatar } from "flowbite-react";
 import Designer from "../../assets/images/Designer.png";
 import AvatarProfile from "../../assets/images/profile-Avatar.jpeg";
-import MenuPosts from '../../components/MenuPosts';
+import MenuPosts from "../../components/MenuPosts";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import {  useState, useEffect } from "react";
+// import axios from "axios";
+import apiService from "../../apiService/apiService.mjs";
+// import { useAuth } from "../../context/authContext/index.jsx";
 
 const PostDetail = () => {
+  // const { cookies } = useAuth();
+  const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  console.log("Post ID:", id);
+  console.log("Location:", location);
+  const [post, setPost] = useState(location.state ?? null);
+  const [loading, setLoading] = useState(!location.state);
+  const [error, setError] = useState(null);
+
+  console.log(post);
+ 
+ useEffect(()=>{
+  if(!post && id){
+    setLoading(true);
+    apiService.getPostById(id)
+    .then((data)=> setPost(data))
+    .catch((err)=>{
+       console.error(err);
+      })
+      .finally(()=> setLoading(false))
+  }
+ },[id, post]);
+
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-20">
+        <div className="animate-pulse text-lg">Loading post...</div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="flex flex-col justify-center items-center py-20 px-4">
+        <div className="text-red-500 text-xl mb-4">⚠️ {error}</div>
+        <button 
+          onClick={() => navigate(-1)}
+          className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Go Back
+        </button>
+      </div>
+    );
+  }
+
+  // Not found state
+  if (!post) {
+    return (
+      <div className="flex flex-col justify-center items-center py-20">
+        <div className="text-xl mb-4">Post not found</div>
+        <button 
+          onClick={() => navigate("/")}
+          className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Back to Home
+        </button>
+      </div>
+    );
+  }
+
   return (
     <>
-      <section className="flex flex-col px-[20vw] pt-8 poppins-regular w-full  xm:px-[5vw] justify-center leading-9">
+      <section className="flex flex-col px-[15vw] pt-8 poppins-regular w-full sm:px-4 sm:justify-center leading-9">
         <div className="ourwork-h1 pt-8 xm:w-full">
-          <h1 className="font-bold font-sans text-2xl">
-            {" "}
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          </h1>
+          <h1 className="font-bold font-sans text-2xl">{post.title}</h1>
         </div>
 
-        <p className="italic text-xm font-medium summary py-4">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        </p>
-        <div className='py-3'><MenuPosts/></div>
-        <div className="bg-purple-500 w-full p-2 h-fit rounded-md">
-          <img src={Designer} alt="post-image" />
+        <div className="flex mx-2 py-2 mb-4 items-center">
+          <span className="text-sm text-gray-600">Posted:</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">
+            {post.createdAt.slice(0, 10)}
+          </span>
+          
+          {/* Author info if available */}
+          {post.author && (
+            <span className="text-sm text-gray-600 ml-4">
+              by <span className="font-medium">{post.author.name}</span>
+            </span>
+          )}
+        </div>
+
+        <div className="py-3">
+          <MenuPosts />
         </div>
       </section>
-      <section className="poppins-regular flex py-4 pl-[20vw] justify-center leading-7 xm:p-[5vw] xm:flex-col-reverse">
-        <p className=" w-2/3 poppins-regular xm:w-full text-justify py-3">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
-          quis repellat. Odio porro hic vel nemo aperiam. Temporibus magni
-          consectetur, laboriosam minima nesciunt soluta, quaerat, asperiores
-          officia fuga modi ab!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
-          quis repellat. Odio porro hic vel nemo aperiam. Temporibus magni
-          consectetur, laboriosam minima nesciunt soluta, quaerat, asperiores
-          officia fuga modi ab!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
-          quis repellat. Odio porro hic vel nemo aperiam. Temporibus magni
-          consectetur, laboriosam minima nesciunt soluta, quaerat, asperiores
-          officia fuga modi ab!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
-          quis repellat. Odio porro hic vel nemo aperiam. Temporibus magni
-          consectetur, laboriosam minima nesciunt soluta, quaerat, asperiores
-          officia fuga modi ab!
 
-        </p>
-        <div className=" flex-1 md:w-1/4 px-14 justify-around xm:flex xm:border-b xm:border-gray-200 xm:px-0">
-          <div className="flex flex-col border-b border-gray-200 pb-2 xm:justify-center xm:border-none">
-            Posted
-            <span className="text-xm text-gray-500 dark:text-gray-400">May 05,2024</span>
-          </div>
-          <div className="border-b border-gray-200 py-4 xm:border-none">
-            <Avatar img={AvatarProfile} rounded>
-              <div className="space-y-1 font-medium dark:text-white">
-                <div>Jess Leos</div>
-                <div className="text-xm text-gray-500 dark:text-gray-400">
-                  Joined in August 2014
-                </div>
-              </div>
-            </Avatar>
-          </div>
+      <section className="flex py-4 px-[15vw] justify-center items-center leading-7 sm:px-4">
+        <div className="w-full">
+          {/* Featured image if available */}
+          {post.image && (
+            <img 
+              src={post.image} 
+              alt={post.title}
+              className="w-full h-auto rounded-lg mb-6"
+            />
+          )}
+          
+          {/* Content */}
+          <div 
+            className="prose prose-lg max-w-none text-justify py-3"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+          
+          {/* OR if content is plain text: */}
+          {/* <p className="w-full text-justify py-3 whitespace-pre-wrap">
+            {post.content}
+          </p> */}
         </div>
       </section>
     </>
