@@ -46,7 +46,7 @@ const PostViewList = () => {
             <LayoutItem>
               <main><Outlet/></main> */}
         <PostMenu>
-          <main className="gradient p-4 max-[600px]:p-2">
+          <main className="gradient--linear p-4 max-[600px]:p-2">
             {/* <CardPost data={cardsData} /> */}
             {/* <span className="flex justify-center items-center mt-4"> */}
             <PaginationComponent data={post} />
