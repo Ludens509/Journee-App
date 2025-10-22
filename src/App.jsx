@@ -2,8 +2,10 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layouts/layout";
+import PostEditView from "./pages/Post/PostEditView.jsx";
 import PostDetails from "./pages/Post/PostDetails";
 import PostViewList from "./pages/Post/PostViewList";
+import CreatePost from "./pages/Post/create/CreatePost.jsx";
 import FavoritePost from "./pages/Like/FavoritePost";
 import Home from "./pages/Home";
 import AuthPage from "./pages/AuthPage/AuthPage";
@@ -53,8 +55,11 @@ function App() {
             <Route path="/auth" element={<AuthPage />} />
 
             <Route element={<ProtectedRoutes />}>
-              <Route path="/posts/:id" element={<PostDetails />} />
+
               <Route path="/posts" element={<PostViewList />} />
+              <Route path="/posts/create" element={<CreatePost />} />
+              <Route path="/posts/:id" element={<PostDetails />} />     
+              <Route path="/posts/:id/edit" element={<PostEditView />} />     
               <Route path="/liked" element={<FavoritePost />} />
             </Route>
           </Route>
