@@ -6,10 +6,11 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import {  useState, useEffect } from "react";
 // import axios from "axios";
 import apiService from "../../apiService/apiService.mjs";
-// import { useAuth } from "../../context/authContext/index.jsx";
+import { useAuth } from "../../context/authContext/index.jsx";
+import { stripHtml } from "../../utils";
 
 const PostDetail = () => {
-  // const { cookies } = useAuth();
+  const { cookies } = useAuth();
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,19 +21,29 @@ const PostDetail = () => {
   const [loading, setLoading] = useState(!location.state);
   const [error, setError] = useState(null);
 
-  console.log(post);
+  console.log("data",post);
  
- useEffect(()=>{
-  if(!post && id){
-    setLoading(true);
-    apiService.getPostById(id)
-    .then((data)=> setPost(data))
-    .catch((err)=>{
-       console.error(err);
-      })
-      .finally(()=> setLoading(false))
-  }
- },[id, post]);
+ useEffect(() => {
+    // Only fetch if we don't have post data
+    if (!post && id) {
+      const fetchPost = async () => {
+        setLoading(true);
+        setError(null);
+        
+        try {
+          const data = await apiService.getPostById(id,cookies.token);
+          setPost(data);
+        } catch (err) {
+          console.error("Error fetching post:", err);
+          setError(err.message || "Failed to load post");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchPost();
+    }
+  }, [id, post, cookies?.token]);
 
 
   // Loading state
@@ -65,7 +76,7 @@ const PostDetail = () => {
       <div className="flex flex-col justify-center items-center py-20">
         <div className="text-xl mb-4">Post not found</div>
         <button 
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/posts")}
           className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Back to Home
@@ -88,15 +99,15 @@ const PostDetail = () => {
           </span>
           
           {/* Author info if available */}
-          {post.author && (
+          {post.username && (
             <span className="text-sm text-gray-600 ml-4">
-              by <span className="font-medium">{post.author.name}</span>
+              by <span className="font-medium">{post.username}</span>
             </span>
           )}
         </div>
 
         <div className="py-3">
-          <MenuPosts />
+          <MenuPosts data={post} />
         </div>
       </section>
 
@@ -112,15 +123,9 @@ const PostDetail = () => {
           )}
           
           {/* Content */}
-          <div 
-            className="prose prose-lg max-w-none text-justify py-3"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-          
-          {/* OR if content is plain text: */}
-          {/* <p className="w-full text-justify py-3 whitespace-pre-wrap">
-            {post.content}
-          </p> */}
+          <p className="w-full text-justify py-3 whitespace-pre-wrap">
+            {stripHtml(post.content)}
+          </p>
         </div>
       </section>
     </>
