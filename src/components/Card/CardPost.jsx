@@ -2,10 +2,14 @@ import { memo, useCallback, useState } from "react";
 import OptionsMenu from "../Popover/OptionMenu";
 import { HeartFilled, HeartOutline } from "./utils";
 import { useNavigate } from "react-router-dom";
+import apiService from "../../apiService/apiService.mjs";
+import { stripHtml } from "../../utils";
+import { useAuth } from "../../context/authContext/index.jsx";
 
 // Memoized individual card component for better performance
 const PostCard = memo(({ item, isLiked, onLike }) => {
   const navigate = useNavigate();
+  const { cookies } = useAuth();
 
   const onCardClick = () => {
     navigate(`/posts/${item.id || item._id}`, { state:  item  });
@@ -25,9 +29,14 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
     </svg>
   );
 
-  const handleDelete = () => {
-    console.log("Delete post", item.id || item._id);
-    navigate('/posts');
+  const handleDelete = async () => {
+    try {
+      await apiService.deletePost(item._id ?? item.id, cookies?.token);
+      // navigate back to posts and refresh list
+      navigate('/posts');
+    } catch (err) {
+      console.error('Delete failed', err);
+    }
   };
 
   const handleEdit = (item) => {
@@ -46,7 +55,7 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
           {item.title}
         </h2>
         <p className="font-normal text-gray-900 dark:text-gray-400 text-sm leading-relaxed  sm:block line-clamp-2">
-          {item.content}
+          {stripHtml(item.content || '').slice(0, 200)}
         </p>
       </header>
 
@@ -75,7 +84,7 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
           </button>
 
           {/* Options Menu */}
-          <div >
+          <div>
             <OptionsMenu
               icon={icon}
               onEdit={()=>handleEdit(item)}
