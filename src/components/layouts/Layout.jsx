@@ -5,8 +5,12 @@ import Nav from "../Navbar/Nav";
 function Layout() {
   return (
     <>
-      <Nav />
-      <main><Outlet /></main>
+    <section className="gradient min-h-screen w-full bg-[#f0f1ff]">
+
+       <header ><Nav/></header>
+      <main className=" mt-12"><Outlet /></main>
+    </section>
+     
     </>
   );
 }
