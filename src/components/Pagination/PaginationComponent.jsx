@@ -9,7 +9,7 @@ function PaginationComponent({ data }) {
   console.log("post in PaginationComponent:", post);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 4;
 
   // memoize total pages
   const totalPages = useMemo(
