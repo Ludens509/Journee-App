@@ -3,25 +3,24 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext/index.jsx";
 import { useUser } from "../../context/userContext/index.jsx";
-// import { useAuth } from "../../context/authContext/authContext.jsx";
-// import { useUser } from "../../context/userContext/authContext.jsx";
+import { Plus } from "lucide-react";
 
 const Nav = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { logout ,cookies} = useAuth();
-  const { user ,setUser} = useUser();
+  const { logout, cookies } = useAuth();
+  const { user, setUser } = useUser();
 
-  const navigate = useNavigate(); 
-  
+  const navigate = useNavigate();
+
   //This effect allow to track auth status and clear user data on logout
- useEffect(()=>{
+  useEffect(() => {
     if (!cookies?.token) {
       setUser(null);
     }
- },[cookies?.token, setUser]);
+  }, [cookies?.token, setUser]);
 
   const handleScroll = () => {
     if (typeof window !== "undefined") {
@@ -49,7 +48,19 @@ const Nav = () => {
     logout();
     navigate("/");
     setIsMenuOpen(!isMenuOpen);
-
+  };
+  const CreatePost = () => {
+    
+    return (
+      <>
+        <Link
+          to="/posts/create"
+          className="flex items-center justify-center rounded-full bg-purple-800 hover:bg-purple-900 text-white size-10 shadow-lg hover:scale-105 transform transition-all"
+        >
+          <Plus className="size-5 text-white" />
+        </Link>
+      </>
+    );
   };
 
   return (
@@ -89,77 +100,82 @@ const Nav = () => {
             <div className="md:flex md:items-center md:gap-12">
               {user ? (
                 <>
-                  {/* Profile Section */}
-                  <div className="relative  md:block">
-                    <button
-                      type="button"
-                      onClick={() => setIsMenuOpen(!isMenuOpen)}
-                      className="overflow-hidden rounded-full border-2 border-white/50 shadow-lg hover:border-white transition-all hover:scale-105 transform"
-                    >
-                      <span className="sr-only">Toggle dashboard menu</span>
-                      <img
-                        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Profile"
-                        className="size-10 object-cover"
-                      />
-                    </button>
-
-                    {/* Dropdown Menu */}
-                    {isMenuOpen && (
-                      <>
-                        <div
-                          className="fixed inset-0 z-10"
-                          onClick={() => setIsMenuOpen(false)}
+                  <section className="flex items-center gap-4">
+                    <div className="mx-4">
+                      <CreatePost />
+                    </div>
+                    {/* Profile Section */}
+                    <div className="relative  md:block">
+                      <button
+                        type="button"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        className="overflow-hidden rounded-full border-2 border-white/50 shadow-lg hover:border-white transition-all hover:scale-105 transform"
+                      >
+                        <span className="sr-only">Toggle dashboard menu</span>
+                        <img
+                          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="Profile"
+                          className="size-10 object-cover"
                         />
-                        <div
-                          className="absolute right-0 z-20 mt-2 w-56 rounded-xl border border-white/30 bg-white/95 backdrop-blur-lg shadow-xl"
-                          role="menu"
-                        >
-                          <div className="p-2">
-                            <Link
-                              href="#profile"
-                              className="block rounded-lg px-4 py-2 text-sm text-purple-900 hover:bg-[#d6bae4]/30 transition-colors"
-                              role="menuitem"
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                              {user.username}'s Profile
-                            </Link>
-                            <Link
-                              to="/posts"
-                              className="block rounded-lg px-4 py-2 text-sm text-purple-900 hover:bg-[#d6bae4]/30 transition-colors"
-                              role="menuitem"
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                             My  Posts
-                            </Link>
-                            <hr className="my-2 border-purple-200" />
-                            <button
-                              type="button"
-                              onClick={handleLogout}
-                              className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
-                              role="menuitem"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-4"
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      {isMenuOpen && (
+                        <>
+                          <div
+                            className="fixed inset-0 z-10"
+                            onClick={() => setIsMenuOpen(false)}
+                          />
+                          <div
+                            className="absolute right-0 z-20 mt-2 w-56 rounded-xl border border-white/30 bg-white/95 backdrop-blur-lg shadow-xl"
+                            role="menu"
+                          >
+                            <div className="p-2">
+                              <Link
+                                href="#profile"
+                                className="block rounded-lg px-4 py-2 text-sm text-purple-900 hover:bg-[#d6bae4]/30 transition-colors"
+                                role="menuitem"
+                                onClick={() => setIsMenuOpen(false)}
                               >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-                                />
-                              </svg>
-                              Logout
-                            </button>
+                                {user.username}'s Profile
+                              </Link>
+                              <Link
+                                to="/posts"
+                                className="block rounded-lg px-4 py-2 text-sm text-purple-900 hover:bg-[#d6bae4]/30 transition-colors"
+                                role="menuitem"
+                                onClick={() => setIsMenuOpen(false)}
+                              >
+                                My Posts
+                              </Link>
+                              <hr className="my-2 border-purple-200" />
+                              <button
+                                type="button"
+                                onClick={handleLogout}
+                                className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                                role="menuitem"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="currentColor"
+                                  className="size-4"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+                                  />
+                                </svg>
+                                Logout
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
+                        </>
+                      )}
+                    </div>
+                  </section>
                 </>
               ) : (
                 <>
@@ -182,7 +198,6 @@ const Nav = () => {
           </div>
         </div>
       </header>
-     
     </>
   );
 };
