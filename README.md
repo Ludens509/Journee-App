@@ -200,9 +200,6 @@ VITE_SPLINE_SCENE_URL=your_spline_scene_url
 | `npm run dev` | Start development server with hot reload |
 | `npm run build` | Build for production |
 | `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint to check code quality |
-| `npm run lint:fix` | Fix ESLint errors automatically |
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
@@ -236,7 +233,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
+- **Your Name** - *Ismael Luden Alexandre* - [YourGitHub](https://github.com/Ludens509)
 
 ## 🙏 Acknowledgments
 
