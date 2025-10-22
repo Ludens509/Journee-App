@@ -1,22 +1,25 @@
+
+// Journee_frontend/src/utils.jsx
+//this constants contain the pages data for the layout navigation menu
 const pages = [
    {title: "posts", link:"/posts", page: "postview" },
-   {title: "Liked", link:"/liked", page:"liked"}  ,   
+   {title: "Liked", link:"/liked", page:"liked"}  ,    
 ];
 
 export default pages;
 
 
-export const range = (start, end, step = 1) => {
-  let output = [];
-  if (typeof end === 'undefined') {
-    end = start;
-    start = 0;
+
+// Utility: strip HTML tags to plain text
+export function stripHtml(html = '') {
+  if (typeof document === 'undefined') {
+    // fallback for non-browser environments
+    return html.replace(/<[^>]*>/g, '');
   }
-  for (let i = start; i < end; i += step) {
-    output.push(i);
-  }
-  return output;
-};
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html || '';
+  return tmp.textContent || tmp.innerText || '';
+}
 
 
 
