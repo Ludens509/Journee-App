@@ -5,7 +5,7 @@ const OptionsMenu = ({icon,onEdit,onDelete}) => {
   
 
   return (
-    <div className="relative">
+    <div className="relative z-20">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
