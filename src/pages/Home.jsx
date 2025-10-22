@@ -1,84 +1,77 @@
-// import { Link } from 'react-router-dom'
-// import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-// import { auth } from '../utils/firebase';
-// import Img from '../assets/images/download(pie22).jpeg';
+import { useRef } from "react";
 import Spline from "@splinetool/react-spline";
 import { useNavigate } from "react-router-dom";
 // import HeroImage from '../assets/images/heroImage.jpg';
 function Home() {
-  // // sign in with google
-  // const googleProvider = new GoogleAuthProvider();
-  // const GoogleLogin = async() => {
-  //   try {
-  //     const result = await signInWithPopup(auth, googleProvider)
-  //     console.log(result.user);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-const navigate=useNavigate();
+  const navigate = useNavigate();
+  const splineRef = useRef(null);
 
   return (
     <>
       <section className="">
         <div className="block--container">
-          <h1 className="text-center">Home</h1>
-          <div className="flex px-20 py-4 my-16 mx-auto space-y-0 xm:flex-col ">
+          <div className="flex px-10 py-12 my-16 mx-auto space-y-0 sm:flex-col ">
             {/* ---Left--- */}
-            <div className=" flex-1 ml-8 space-y-10 w-1/2 xm:w-full xm:ml-2">
+            <div className=" flex-1 ml-8 space-y-10 w-2/2 sm:w-full sm:ml-2">
               <div className="background-container">
                 <h1 className="text--box font-medium text-2xl mt-12">
                   Write Your Ways Through Life`s Adventures.
                 </h1>
               </div>
-              <p className="poppins-regular mr-20">
-                Manage make it simple for software teams to plan day-to-daytask
-                while keeping the larger team goals in view.
+              <p className="poppins-regular mr-16">
+                Tired of cluttered apps and forgotten notebooks? Journee gives
+                you a clean, distraction-free space to capture your
+                thoughts—inspired by Medium's elegant design, but made just for
+                you. Start building your journaling habit today!
               </p>
               <button
-                onClick={()=>{
-                    navigate("/auth")
+                onClick={() => {
+                  navigate("/auth");
                 }}
-                className=" flex items-center justify-center btn--start p-3 px-6 text-white bg-[#A1683B] hover:z-0 rounded-full relative "
+                className=" btn--started flex items-center justify-center btn--start p-3 px-6  text-white hover:z-0 rounded-full relative "
               >
                 Get started
               </button>
             </div>
             {/* ---Right--- */}
-            <div className="flex-1  w-1/2 bg-white xm:w-full xm:mt-4 xm:mb-4 xm:ml-2">
+            <div className="relative flex-1   xm:w-full xm:mt-4 xm:mb-4 xm:ml-2">
               {/* <img src={Img} alt='image_thumbnail' className='w-8/12 xm:hidden' />
                */}
-             <div className=" xm:hidden xm:flex-row">
-                {/* <Spline
+
+              {/* Spline library that display 3D image animation */}
+              <div className="absolute top-[1%]  right-[1%]  sm:hidden sm:flex-row">
+                <Spline
+                  ref={splineRef}
                   scene="https://prod.spline.design/IzDBUKdMuk8WH22V/scene.splinecode"
                   width="500px"
-                /> */}
-</div>
+                />
+              </div>
+              {/*  */}
             </div>
           </div>
           <div className="global gradient">
             <div className="ourwork">
               <h1 className="ourwork-h1 poppins-regular">
-                We create beautiful and fast web services
+                Your Life, Your Words, Your Legacy,
               </h1>
             </div>
 
-            <section className="pb-[--fluid-lg] md:px-[--fluid-base]">
+            <section className="pb-[--fluid-lg] md:px-[--fluid-base] px-[--fluid-xm] mt-10">
               {/* <div className="bg-[--bg-violet] p-[--fluid-xm] overflow-hidden mx-auto  translate-x-0 md:rounded-lg hover:scale-110 transition-transform duration-[1500ms] ease-in-out "> */}
-              <div className=" p-[--fluid-xm] bg-[#a1673b1e] overflow-hidden mx-auto  translate-x-0 md:rounded-lg hover:scale-110 transition-transform duration-[1500ms] ease-in-out  backdrop-blur-[4px] border-solid-[rgba(255,255,255,0.4)] border-[1px]  shadow-[rgba(255,255,255,0.90)]">
+              <div className=" ">
                 <div className="flex flex-col items-center justify-center mb-[0.5rem]">
                   <header className="mx-auto mb-2xl flex flex-col text-center items-center  justify-center mb-[--fluid-xm]">
                     <div className="flex items-center gap-1 ">
                       <h2 className="mb-[1.5rem] color-[#2b1c50]">
-                        keep your content safe
+                        The Modern Diary for Mindful Living
                       </h2>
                     </div>
                     <p className="mt-[1rem] color-[#3d2e7c">
                       {" "}
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Illo non iure quisquam repudiandae maiores error
-                      doloremque, minima at velit ex vel quibusdam quam rerum
-                      enim, nostrum dolorem dolores modi suscipit?
+                      Capture your daily moments, track your personal growth,
+                      and build a meaningful habit of reflection. With Journee's
+                      distraction-free interface inspired by Medium, journaling
+                      becomes an experience you'll look forward to.
                     </p>
                   </header>
                 </div>
@@ -91,7 +84,7 @@ const navigate=useNavigate();
               {/* <Spline scene="https://prod.spline.design/q8IELBO6Rjwr3Qyu/scene.splinecode" /> */}
             </div>
 
-            {/* <section className="banner flex text-center bg-purple-800 w-full h-[285px]">
+            <section className="banner flex text-center bg-ring-purple w-full h-[285px]">
             <div className=" self-center absolute left-[30%] xm:left-[23%] xm:text-base xm: m-4 xm:sticky">
               <h1 className="montserrat-semibold">
                 MyJournee where stories unfold.
@@ -101,9 +94,9 @@ const navigate=useNavigate();
                 The idea behind <b>MyJournee </b> is to have a diary wher you
                 can unfold all your stories.
               </p>
-            </div> */}
+            </div> 
             {/* <img src={HeroImage} alt="banner"  className='banner-img opacity-20' /> */}
-            {/* </section> */}
+             </section>
           </div>
         </div>
       </section>

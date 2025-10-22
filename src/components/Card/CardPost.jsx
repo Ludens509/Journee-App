@@ -47,7 +47,7 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
     <article
       onClick={onCardClick} // make the whole card clickable
       aria-label={` View details post ${item.title}`} //Defines a string value that labels the current element.
-      className=" gradient group relative bg-white/80  backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-700/20 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-out w-full p-6 my-4 cursor-pointer"
+      className="  relative bg-white/80  backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-700/20 shadow-sm hover:shadow-xl hover:ring-2 ring-ring-purple transition-all duration-300 ease-out w-full p-6 my-4 cursor-pointer"
     >
       {/* Header Section */}
       <header className="mb-4">

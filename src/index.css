@@ -8,6 +8,7 @@
   --breakpoint-tablet: 40rem;
   --breakpoint-laptop: 64rem;
   --breakpoint-desktop: 80rem;
+  --color-ring-purple:#d6bae4;
 }
 
 :root {
@@ -58,7 +59,7 @@
 .block--container {
   justify-content: center;
   /* background-image: url("./assets/images/mesh-gradient.png"); */
-  background-image: linear-gradient(100deg, #d6bae4, transparent 50%);
+  background-image: linear-gradient(200deg, #d6bae4, transparent 40%);
   background-repeat: no-repeat;
   width: -moz-fit-content;
   width: fit-content;
@@ -163,6 +164,8 @@ h1 {
   /* background-image: radial-gradient(#d6bae4, #ffffff 20%); */
 /* animation: hue-rotate 5s linear infinite; */
 }
+/* .btn--started{ background: linear-gradient(135deg, #d6bae4 0%, #d4e8f5 100%)} */
+.btn--started{ background: #f9f7fb; border: 2px solid #d6bae4; color: #4a4458};
 
 .btn--start::after {
   content: "";
@@ -170,7 +173,7 @@ h1 {
   height: 110%;
   width: 105%;
   border-radius: 9999px;
-  background-image: linear-gradient(to bottom right, #394aaa, #963ab4);
+  background-image: linear-gradient(to bottom right,135deg, #d6bae4 0%, #d4e8f5 100%);
   z-index: -1;
 }
 .btn-start:hover {
