@@ -84,7 +84,7 @@ function Home() {
               {/* <Spline scene="https://prod.spline.design/q8IELBO6Rjwr3Qyu/scene.splinecode" /> */}
             </div>
 
-            <section className="banner flex text-center bg-ring-purple w-full h-[285px]">
+            {/* <section className="banner flex text-center bg-ring-purple w-full h-[285px]">
             <div className=" self-center absolute left-[30%] xm:left-[23%] xm:text-base xm: m-4 xm:sticky">
               <h1 className="montserrat-semibold">
                 MyJournee where stories unfold.
@@ -95,8 +95,8 @@ function Home() {
                 can unfold all your stories.
               </p>
             </div> 
-            {/* <img src={HeroImage} alt="banner"  className='banner-img opacity-20' /> */}
-             </section>
+            <img src={HeroImage} alt="banner"  className='banner-img opacity-20' />
+             </section> */}
           </div>
         </div>
       </section>

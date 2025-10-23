@@ -227,9 +227,6 @@ Contributions are welcome! Please follow these steps:
 - Keep components small and focused
 - Write tests for new features (if applicable)
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👥 Authors
 
@@ -246,16 +243,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions or feedback, please reach out:
 
-- **Email**: your.email@example.com
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **Twitter**: [@yourhandle](https://twitter.com/yourhandle)
+- **Email**: alexandreludens2@gmail.com
+- **GitHub**: [@Ludens509](https://github.com/Ludens509)
 
 ## 🗺️ Roadmap
 
 - [ ] Dark mode implementation
 - [ ] Advanced search and filtering
 - [ ] Export entries to PDF/Markdown
-- [ ] Mobile app (React Native)
 - [ ] Mood tracking
 - [ ] Writing streaks and statistics
 - [ ] Rich media support (audio, video)
