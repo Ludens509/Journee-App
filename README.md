@@ -57,7 +57,7 @@ Journee is a digital diary web application inspired by Medium.com, originally cr
 - **[Lucide React](https://lucide.dev/)** (v0.546.0) - Icon library
 - **[React Icons](https://react-icons.github.io/react-icons/)** (v5.5.0) - Additional icons
 - **[Tailwind Scrollbar](https://github.com/adoxography/tailwind-scrollbar)** (v4.0.2) - Custom scrollbar styling
-
+- **[Spline](https://spline.design/)** - Spline — optional 3D scene integration (decorative)
 ### Rich Text Editor
 
 - **[TipTap](https://tiptap.dev/)** (v3.7.2) - Headless rich text editor
@@ -66,53 +66,8 @@ Journee is a digital diary web application inspired by Medium.com, originally cr
   - `@tiptap/extension-image` - Image support
   - `@tiptap/extension-link` - Hyperlink support
   - `@tiptap/extension-placeholder` - Placeholder text
-# Journee — Frontend (React + Vite)
 
-![Journee banner](./public/banner.png)
 
-A personal digital diary web application (frontend) built with React and Vite. This repository contains the SPA that interacts with the Journee backend API to create, edit, and manage diary entries using a rich text editor.
-
-## Table of contents
-
-- [About](#about)
-- [Features](#features)
-- [Tech & Tools](#tech--tools)
-- [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-- [Available Scripts](#available-scripts)
-- [Environment variables](#environment-variables)
-- [Project structure](#project-structure)
-- [API contract (backend)](#api-contract-backend)
-- [Contributing](#contributing)
-- [License & Contact](#license--contact)
-
-## About
-
-Journee is a minimal, beautiful writing experience inspired by Medium — adapted for private journaling. The frontend is responsible for authenticated UI, rich-text entry editing (TipTap), and communicating with the backend API for persistence.
-
-## Features
-
-- User registration & authentication
-- Create, read, update and delete personal posts
-- Rich text editor (TipTap) with images and links
-- Responsive UI using Tailwind CSS
-- Toast notifications and cookie-based token handling
-- Basic pagination and post list views
-
-## Tech & Tools
-
-Core:
-- React (v19)
-- Vite (dev server & build)
-- React Router DOM (routing)
-- Axios (HTTP client)
-
-Editor & UI:
-- TipTap (@tiptap/react and extensions) — rich text editor
-- Tailwind CSS (+ plugins)
-- Flowbite React — UI components
-- Lucide React / React Icons — iconography
-- Spline — optional 3D scene integration (decorative)
 
 State & utilities:
 - react-cookie — cookie management for token
@@ -192,7 +147,7 @@ Journee_frontend/
 │   ├── components/        # Reusable components (cards, menus)
 │   ├── context/           # React contexts (auth, user)
 │   ├── pages/             # Route pages (Home, Post, Auth)
-│   ├── utils.jsx          # Utility helpers (stripHtml etc.)
+│   ├── utils.jsx          # Utility helpers for text editor (stripHtml etc.)
 │   ├── App.jsx            # App root
 │   └── main.jsx           # App entry (Vite)
 ├── index.html
