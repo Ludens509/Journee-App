@@ -39,7 +39,7 @@ function Home() {
                */}
 
               {/* Spline library that display 3D image animation */}
-              <div className="absolute top-[1%]  right-[1%]  sm:hidden sm:flex-row">
+              <div className="absolute top-[-3%]  right-[0%] spline  sm:hidden md:hidden sm:flex-row sm:relative">
                 <Spline
                   ref={splineRef}
                   scene="https://prod.spline.design/IzDBUKdMuk8WH22V/scene.splinecode"
@@ -59,15 +59,16 @@ function Home() {
             <section className="pb-[--fluid-lg] md:px-[--fluid-base] px-[--fluid-xm] mt-10">
               {/* <div className="bg-[--bg-violet] p-[--fluid-xm] overflow-hidden mx-auto  translate-x-0 md:rounded-lg hover:scale-110 transition-transform duration-[1500ms] ease-in-out "> */}
               <div className=" ">
-                <div className="flex flex-col items-center justify-center mb-[0.5rem]">
-                  <header className="mx-auto mb-2xl flex flex-col text-center items-center  justify-center mb-[--fluid-xm]">
+                <div className="flex flex-col items-center justify-center mb-[0.5rem] banner  text-center bg-ring-purple w-full h-[285px]">
+                  <header className="mx-auto mb-2xl flex flex-col text-center items-center  justify-center mb-[--fluid-xm] ">
                     <div className="flex items-center gap-1 ">
-                      <h2 className="mb-[1.5rem] color-[#2b1c50]">
+                      <h2 className="mb-[1.5rem] color-[#2b1c50] text-2xl
+                       poppins-semibold sm:text-xl md:text-lg">
                         The Modern Diary for Mindful Living
                       </h2>
                     </div>
-                    <p className="mt-[1rem] color-[#3d2e7c">
-                      {" "}
+                    <p className="mt-[1rem] color-[#3d2e7c] poppins-regular max-w-3xl px-4 text-xl">
+                     
                       Capture your daily moments, track your personal growth,
                       and build a meaningful habit of reflection. With Journee's
                       distraction-free interface inspired by Medium, journaling
@@ -77,14 +78,9 @@ function Home() {
                 </div>
               </div>
             </section>
-            <div className="">
-              <h1 className="text-center text-2xl font-semibold">
-                Why Choose Us?
-              </h1>
-              {/* <Spline scene="https://prod.spline.design/q8IELBO6Rjwr3Qyu/scene.splinecode" /> */}
-            </div>
+           
 
-            <section className="banner flex text-center bg-ring-purple w-full h-[285px]">
+            {/* <section className="banner flex text-center bg-ring-purple w-full h-[285px]">
             <div className=" self-center absolute left-[30%] xm:left-[23%] xm:text-base xm: m-4 xm:sticky">
               <h1 className="montserrat-semibold">
                 MyJournee where stories unfold.
@@ -95,8 +91,8 @@ function Home() {
                 can unfold all your stories.
               </p>
             </div> 
-            {/* <img src={HeroImage} alt="banner"  className='banner-img opacity-20' /> */}
-             </section>
+            <img src={HeroImage} alt="banner"  className='banner-img opacity-20' />
+             </section> */}
           </div>
         </div>
       </section>

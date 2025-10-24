@@ -5,7 +5,7 @@ const OptionsMenu = ({icon,onEdit,onDelete}) => {
   
 
   return (
-    <div className="relative z-20">
+    <div className="relative z-20  backdrop-blur-xs">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}

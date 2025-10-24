@@ -229,6 +229,11 @@ button:hover {
     width: 100%;
   }
 }
+@media screen and (min-width: 1200px) {
+ .spline{
+  display: none;
+ }
+}
 /* @keyframes back{
   100%{
     background-position: 1000px 0;

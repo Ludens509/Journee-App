@@ -35,7 +35,7 @@ function RegisterForm({ setNewUser }) {
 
       navigate("/posts");
     } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      toast.error(err.message || err.error);
       console.error(err.message);
     }
   };

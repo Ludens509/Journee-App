@@ -3,9 +3,7 @@
 import PostMenu from "./PostMenu";
 import { useEffect } from "react";
 import axios from "axios";
-// import { range } from "../../utils";
-// import CardPost from "../../Components/Card/CardPost";
-// import cardsData from "../../data";
+
 import PaginationComponent from "../../Components/Pagination/PaginationComponent";
 import { useUser } from "../../context/userContext";
 import { useAuth } from "../../context/authContext/index.jsx";
@@ -34,6 +32,8 @@ const PostViewList = () => {
     }
 
     getData();
+    console.log("testing");
+    
   }, [user, setPost, cookies?.token]);
 
  

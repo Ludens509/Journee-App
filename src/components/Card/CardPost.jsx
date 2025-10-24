@@ -12,7 +12,7 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
   const { cookies } = useAuth();
 
   const onCardClick = () => {
-    navigate(`/posts/${item.id || item._id}`, { state:  item  });
+    navigate(`/posts/${item.id || item._id}`, { state: item });
   };
 
   const icon = (
@@ -32,22 +32,24 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
   const handleDelete = async () => {
     try {
       await apiService.deletePost(item._id ?? item.id, cookies?.token);
-      // navigate back to posts and refresh list
-      navigate('/posts');
+      // Navigate back to posts so React state is preserved and token/cookies aren't reset
+      window.location.reload();
+      navigate("/posts");
+      console.log("Deleted and navigated back to /posts");
     } catch (err) {
-      console.error('Delete failed', err);
+      console.error("Delete failed", err);
     }
   };
 
   const handleEdit = (item) => {
     console.log("Edit post", item.id || item._id);
-    navigate(`/posts/${item.id || item._id}/edit`, { state: item } );
+    navigate(`/posts/${item.id || item._id}/edit`, { state: item });
   };
   return (
     <article
       onClick={onCardClick} // make the whole card clickable
       aria-label={` View details post ${item.title}`} //Defines a string value that labels the current element.
-      className="  relative bg-white/80  backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-700/20 shadow-sm hover:shadow-xl hover:ring-2 ring-ring-purple transition-all duration-300 ease-out w-full p-6 my-4 cursor-pointer"
+      className="relative bg-white/70 rounded-xl border border-gray-200/50 dark:border-gray-700/20 shadow-sm hover:shadow-xl hover:ring-2 ring-ring-purple transition-all duration-300 ease-out w-full p-6 my-4 cursor-pointer" // adding this property for blur backdrop-blur-xs
     >
       {/* Header Section */}
       <header className="mb-4">
@@ -55,17 +57,20 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
           {item.title}
         </h2>
         <p className="font-normal text-gray-900 dark:text-gray-400 text-sm leading-relaxed  sm:block line-clamp-2">
-          {stripHtml(item.content || '').slice(0, 200)}
+          {stripHtml(item.content || "").slice(0, 200)}
         </p>
       </header>
 
       {/* Footer Section */}
-      <footer  className="flex items-center justify-between py-3 border-t border-gray-200/50 dark:border-gray-700/50">
+      <footer className="flex items-center justify-between py-3 border-t border-gray-200/50 dark:border-gray-700/50">
         <time className="text-sm text-gray-500 dark:text-gray-400">
           {item.createdAt.slice(0, 10)}
         </time>
 
-        <div onClick={(e) => e.stopPropagation()} className="flex items-center gap-4">
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-4"
+        >
           {/* Like Button */}
           <button
             type="button"
@@ -74,11 +79,11 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
             aria-label={isLiked ? "Unlike post" : "Like post"}
           >
             {isLiked ? (
-              <HeartFilled size={24} className="drop-shadow-sm" />
+              <HeartFilled size={24} className="drop-shadow-sm "  />
             ) : (
               <HeartOutline
                 size={24}
-                className="text-gray-600 dark:text-gray-400"
+                className="text-gray-600 dark:text-gray-600 fill-red-500"
               />
             )}
           </button>
@@ -86,8 +91,9 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
           {/* Options Menu */}
           <div>
             <OptionsMenu
+              className="bg-white/70 backdrop-blur-sm text-gray-600 dark:text-gray-400"
               icon={icon}
-              onEdit={()=>handleEdit(item)}
+              onEdit={() => handleEdit(item)}
               onDelete={handleDelete}
             />
             {/*This component holds the 3 dots menu for additional post options*/}
@@ -142,14 +148,14 @@ const CardPost = ({ data }) => {
   return (
     <>
       <section className="space-y-4">
-          {data.map((item, idx) => (
-            <PostCard
-              key={item._id ?? item.id ?? idx}
-              item={item}
-              isLiked={!!likedPosts[item._id ?? item.id]}
-              onLike={() => handleLike(item._id ?? item.id)}
-            />
-          ))}
+        {data.map((item, idx) => (
+          <PostCard
+            key={item._id ?? item.id ?? idx}
+            item={item}
+            isLiked={!!likedPosts[item._id ?? item.id]}
+            onLike={() => handleLike(item._id ?? item.id)}
+          />
+        ))}
       </section>
     </>
   );

@@ -1,7 +1,7 @@
 // import AppRouter from "./routes/router";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./Components/Layouts/layout";
+import Layout from "./components/layouts/layout.jsx";
 import PostEditView from "./pages/Post/PostEditView.jsx";
 import PostDetails from "./pages/Post/PostDetails";
 import PostViewList from "./pages/Post/PostViewList";
@@ -17,24 +17,29 @@ import { useUser } from "./context/userContext/index.jsx";
 
 function App() {
   const { cookies, logout } = useAuth();
-  const { setUser,  } = useUser();
+  const { setUser,user  } = useUser();
 
   async function getData() {
     try {
-      //Getting all the posts
-      // let res = await axios.get(`http://localhost:3000/api/posts`);
-      // setPost(res.data);
-
-      if (cookies.token) {
+     
+      if ( !user && cookies.token) {
+        console.log(cookies.token);
         let res = await apiService.getUser(cookies.token);
 
         setUser(res);
+      }else{
+        return
       }
       
-      // console.log("see",res)
+     
     } catch (err) {
-      logout();
-      console.error(err);
+      // Only logout on authorization errors (401). Other errors shouldn't remove the token.
+      const status = err?.response?.status || err?.status;
+      if (status === 401) {
+        logout();
+      } else {
+        console.error(err);
+      }
     }
   }
 
@@ -53,7 +58,7 @@ function App() {
           <Route path={""} element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<AuthPage />} />
-
+        {/* ----------------------------------------------- */}
             <Route element={<ProtectedRoutes />}>
 
               <Route path="/posts" element={<PostViewList />} />
@@ -62,6 +67,7 @@ function App() {
               <Route path="/posts/:id/edit" element={<PostEditView />} />     
               <Route path="/liked" element={<FavoritePost />} />
             </Route>
+            {/*---------------------------------------------  */}
           </Route>
         </Routes>
       </div>
