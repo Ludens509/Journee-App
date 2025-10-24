@@ -2,7 +2,7 @@
 
 > A digital diary web application inspired by Medium, designed for personal reflection, self-expression, and growth.
 
-![Journee Banner](./public/banner.png) <!-- Add your banner image -->
+![Journee Banner](https://i.imgur.com/0sUnk2b.png) <!-- Add your banner image -->
 
 ## 📋 Table of Contents
 
