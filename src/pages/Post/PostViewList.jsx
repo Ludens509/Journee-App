@@ -4,7 +4,7 @@ import PostMenu from "./PostMenu";
 import { useEffect } from "react";
 import axios from "axios";
 
-import PaginationComponent from "../../Components/Pagination/PaginationComponent";
+import PaginationComponent from "../../components/Pagination/PaginationComponent";
 import { useUser } from "../../context/userContext";
 import { useAuth } from "../../context/authContext/index.jsx";
 
@@ -19,7 +19,7 @@ const PostViewList = () => {
       if (!user || !cookies?.token) return; // skip fetch if no user or token
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/posts/user/${user._id}`,
+          `https://journee-backend.onrender.com/api/posts/user/${user._id}`,
           {
               headers: { "x-auth-token": cookies.token },
           }
