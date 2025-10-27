@@ -3,7 +3,6 @@
 import PostMenu from "./PostMenu";
 import { useEffect } from "react";
 import axios from "axios";
-
 import PaginationComponent from "../../components/Pagination/PaginationComponent";
 import { useUser } from "../../context/userContext";
 import { useAuth } from "../../context/authContext/index.jsx";

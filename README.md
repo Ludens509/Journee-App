@@ -2,7 +2,7 @@
 
 > A digital diary web application inspired by Medium, designed for personal reflection, self-expression, and growth.
 
-![Journee Banner](./public/banner.png) <!-- Add your banner image -->
+![Journee Banner](https://i.imgur.com/0sUnk2b.png) <!-- Add your banner image -->
 
 ## 📋 Table of Contents
 
@@ -57,7 +57,7 @@ Journee is a digital diary web application inspired by Medium.com, originally cr
 - **[Lucide React](https://lucide.dev/)** (v0.546.0) - Icon library
 - **[React Icons](https://react-icons.github.io/react-icons/)** (v5.5.0) - Additional icons
 - **[Tailwind Scrollbar](https://github.com/adoxography/tailwind-scrollbar)** (v4.0.2) - Custom scrollbar styling
-
+- **[Spline](https://spline.design/)** - Spline — optional 3D scene integration (decorative)
 ### Rich Text Editor
 
 - **[TipTap](https://tiptap.dev/)** (v3.7.2) - Headless rich text editor
@@ -66,42 +66,33 @@ Journee is a digital diary web application inspired by Medium.com, originally cr
   - `@tiptap/extension-image` - Image support
   - `@tiptap/extension-link` - Hyperlink support
   - `@tiptap/extension-placeholder` - Placeholder text
-  - `@tiptap/extension-text-align` - Text alignment
-  - `@tiptap/extension-underline` - Underline formatting
 
-### State & Data Management
 
-- **[Axios](https://axios-http.com/)** (v1.12.2) - HTTP client for API requests
-- **[React Cookie](https://github.com/reactivestack/cookies)** (v8.0.1) - Cookie management
 
-### Notifications & UX
+State & utilities:
+- react-cookie — cookie management for token
+- react-toastify — notifications
 
-- **[React Toastify](https://fkhadra.github.io/react-toastify/)** (v11.0.5) - Toast notifications
+Dev & tooling:
+- ESLint, @vitejs/plugin-react, Vite
 
-### 3D Graphics
+This list is taken from `package.json` and matches installed dependencies.
 
-- **[Spline](https://spline.design/)** - 3D design tool
-  - `@splinetool/react-spline` (v4.1.0) - React integration
-  - `@splinetool/runtime` (v1.10.85) - Runtime engine
+## Prerequisites
 
-## 📦 Prerequisites
+- Node.js (v18+ recommended)
+- npm (v9+) or Yarn
 
-Before you begin, ensure you have the following installed:
+## Getting started
 
-- **Node.js** (v18.0.0 or higher)
-- **npm** (v9.0.0 or higher) or **yarn** (v1.22.0 or higher)
-- **Git**
-
-## 🚀 Installation
-
-1. **Clone the repository**
+1. Clone the repository and change into the frontend folder:
 
 ```bash
-git clone https://github.com/yourusername/journee.git
-cd journee
+git clone https://github.com/Ludens509/journee.git
+cd journee/Journee_frontend
 ```
 
-2. **Install dependencies**
+2. Install dependencies:
 
 ```bash
 npm install
@@ -109,16 +100,9 @@ npm install
 yarn install
 ```
 
-3. **Set up environment variables**
+3. Create a `.env` file (see Environment variables below).
 
-Create a `.env` file in the root directory:
-
-```env
-VITE_API_URL=http://localhost:3000/api
-VITE_APP_NAME=Journee
-```
-
-4. **Start the development server**
+4. Start the development server:
 
 ```bash
 npm run dev
@@ -126,139 +110,91 @@ npm run dev
 yarn dev
 ```
 
-The app will be available at `http://localhost:5173`
+The app will usually be served at `http://localhost:5173` (Vite default).
 
-## 💻 Usage
+## Available scripts
 
-### Development
+The scripts in `package.json` are:
 
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
+- `dev` — start Vite dev server
+- `build` — build the production bundle
+- `preview` — serve a local preview of the production build
+- `lint` — run ESLint
 
+Run them with npm, e.g. `npm run dev`.
+
+## Environment variables
+
+Create a `.env` file at `Journee_frontend/.env` or at repo root depending on your setup. At minimum set the backend API URL:
+
+```env
+VITE_API_URL=http://localhost:3000/api
+VITE_APP_NAME=Journee
 ```
 
-### Creating Your First Entry
+Optionally add third-party keys (e.g. Spline scene URL) as `VITE_` prefixed variables.
 
-1. **Sign up** or **Log in** to your account
-2. Click **"Create New Entry"**
-3. Start writing with the rich text editor
-4. Add formatting, images, and links as needed
-5. Click **"Save"** to store your entry
+> Note: Vite exposes `VITE_` prefixed env variables to the client.
 
-## 📁 Project Structure
+## Project structure
 
 ```
-journee/
-├── public/              # Static assets
+Journee_frontend/
+├── public/                # Static assets (images, banners)
 ├── src/
-│   ├── assets/          # Images, fonts, etc.
-│   ├── components/      # Reusable components
-│   │   ├── MenuPosts.jsx
-│   │   └── ...
-│   ├── context/         # React Context providers
-│   │   └── authContext/
-│   ├── pages/           # Page components
-│   │   ├── CreatePost.jsx
-│   │   ├── PostDetail.jsx
-│   │   └── ...
-│   ├── apiService/      # API integration
-│   │   └── apiService.mjs
-│   ├── utils/           # Utility functions
-│   │   └── sanitize.js
-│   ├── App.jsx          # Main app component
-│   ├── main.jsx         # App entry point
-│   └── index.css        # Global styles
-├── .env                 # Environment variables
-├── .gitignore
+│   ├── apiService/        # API client wrappers (apiService.mjs)
+│   ├── assets/            # Images, icons, etc.
+│   ├── components/        # Reusable components (cards, menus)
+│   ├── context/           # React contexts (auth, user)
+│   ├── pages/             # Route pages (Home, Post, Auth)
+│   ├── utils.jsx          # Utility helpers for text editor (stripHtml etc.)
+│   ├── App.jsx            # App root
+│   └── main.jsx           # App entry (Vite)
+├── index.html
 ├── package.json
-├── vite.config.js       # Vite configuration
-├── tailwind.config.js   # Tailwind configuration
+├── vite.config.js
+├── tailwind.config.js
 └── README.md
 ```
 
-## 🔐 Environment Variables
+## API contract (backend)
 
-Create a `.env` file in the root directory with the following variables:
+The frontend expects a backend API (see `Journee-backend`) and uses the following environment variable to locate it: `VITE_API_URL`.
 
-```env
-# API Configuration
-VITE_API_URL=http://localhost:3000/api
+Common endpoints used by the frontend:
 
-# App Configuration
-VITE_APP_NAME=Journee
-VITE_APP_VERSION=1.0.0
+- `POST /api/users` — register (returns `{ token }`)
+- `POST /api/auth` — login (returns `{ token }`)
+- `GET /api/auth` — get current user (protected; pass `x-auth-token`)
+- `GET /api/posts` — list posts
+- `GET /api/posts/:id` — get a single post
+- `POST /api/posts` — create post (protected)
+- `PUT /api/posts/:id/edit` — update post (protected)
+- `DELETE /api/posts/:id` — delete a post (protected)
 
-# Optional: Third-party services
-VITE_SPLINE_SCENE_URL=your_spline_scene_url
-```
+Authentication: the app currently stores the JWT in a cookie (react-cookie). For higher security we recommend migrating to server-set `httpOnly` cookies and using CORS `credentials: true` on the server.
 
-## 📜 Scripts
+## Contributing
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server with hot reload |
-| `npm run build` | Build for production |
+Contributions are welcome. Suggested workflow:
 
-## 🤝 Contributing
+1. Fork the repo
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Commit changes and open a Pull Request
 
-Contributions are welcome! Please follow these steps:
+Please follow the established code style and run the linter before submitting.
 
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Commit your changes**
-   ```bash
-   git commit -m 'Add some amazing feature'
-   ```
-4. **Push to the branch**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. **Open a Pull Request**
+## License & contact
 
-### Code Style
+This project uses the ISC license (see repository root).
 
-- Follow the existing code style
-- Use meaningful variable and function names
-- Comment complex logic
-- Keep components small and focused
-- Write tests for new features (if applicable)
+If you have questions or want to collaborate, reach out:
 
-
-## 👥 Authors
-
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
-
-## 🙏 Acknowledgments
-
-- Inspired by [Medium.com](https://medium.com/)
-- Built with [TipTap](https://tiptap.dev/) for rich text editing
-- UI components from [Flowbite React](https://flowbite-react.com/)
-- Icons from [Lucide](https://lucide.dev/)
-
-## 📧 Contact
-
-For questions or feedback, please reach out:
-
-- **Email**: alexandreludens2@gmail.com
-- **GitHub**: [@Ludens509](https://github.com/Ludens509)
-
-## 🗺️ Roadmap
-
-- [ ] Dark mode implementation
-- [ ] Advanced search and filtering
-- [ ] Export entries to PDF/Markdown
-- [ ] Mood tracking
-- [ ] Writing streaks and statistics
-- [ ] Rich media support (audio, video)
-- [ ] Encryption for enhanced privacy
+- Email: alexandreludens2@gmail.com
+- GitHub: https://github.com/Ludens509
 
 ---
-# ⚙️ Backend_link
-https://github.com/Ludens509/Journee-backend.git
 
+Backend repository: https://github.com/Ludens509/Journee-backend
 
-**Made with ❤️ for personal growth and reflection**
+Made with ❤️ for personal growth and reflection
