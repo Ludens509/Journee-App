@@ -1,7 +1,7 @@
 // import AppRouter from "./routes/router";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./Components/Layouts/layout";
+import Layout from "./Components/layouts/Layout.jsx";
 import PostEditView from "./pages/Post/PostEditView.jsx";
 import PostDetails from "./pages/Post/PostDetails";
 import PostViewList from "./pages/Post/PostViewList";
