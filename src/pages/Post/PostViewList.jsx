@@ -6,7 +6,7 @@ import axios from "axios";
 // import { range } from "../../utils";
 // import CardPost from "../../Components/Card/CardPost";
 // import cardsData from "../../data";
-import PaginationComponent from "../../Components/Pagination/PaginationComponent";
+import PaginationComponent from "../../components/Pagination/PaginationComponent";
 import { useUser } from "../../context/userContext";
 import { useAuth } from "../../context/authContext/index.jsx";
 
