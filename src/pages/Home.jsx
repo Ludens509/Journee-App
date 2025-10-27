@@ -39,7 +39,7 @@ function Home() {
                */}
 
               {/* Spline library that display 3D image animation */}
-              <div className="absolute top-[-3%]  right-[0%] spline  sm:hidden md:hidden sm:flex-row sm:relative">
+              <div className=" spline absolute top-[-3%]  right-[0%]  sm:hidden  sm:flex-row sm:relative">
                 <Spline
                   ref={splineRef}
                   scene="https://prod.spline.design/IzDBUKdMuk8WH22V/scene.splinecode"
