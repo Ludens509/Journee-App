@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Nav from "../Navbar/Nav";
+import { ToastContainer } from "react-toastify";
 
 
 function Layout() {
@@ -9,6 +10,18 @@ function Layout() {
 
        <header ><Nav/></header>
       <main className=" mt-12"><Outlet /></main>
+      <div><ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      /></div>
     </section>
      
     </>

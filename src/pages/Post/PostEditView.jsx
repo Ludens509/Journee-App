@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import apiService from '../../apiService/apiService.mjs';
 import { useAuth } from '../../context/authContext';
+import { toast } from 'react-toastify';
 
 const PostEditView = () => {
   const navigate = useNavigate();
@@ -135,12 +136,14 @@ const PostEditView = () => {
       };
 
       const response = await apiService.updatePost(id, postData, cookies.token);
-      console.log('Post updated:', response);
+      // console.log('Post updated:', response);
+      toast.success('Post updated successfully!');
       // Navigate back to post details
       navigate(`/posts/${id}`, { state: response });
     } catch (err) {
       console.error('Error creating post:', err);
       setError(err.response?.data?.message || 'Failed to create post');
+      toast.error('Failed to create post');
     } finally {
       setLoading(false);
     }

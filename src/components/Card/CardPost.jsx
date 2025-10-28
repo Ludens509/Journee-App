@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import apiService from "../../apiService/apiService.mjs";
 import { stripHtml } from "../../utils";
 import { useAuth } from "../../context/authContext/index.jsx";
+import { toast } from "react-toastify";
+
 
 // Memoized individual card component for better performance
 const PostCard = memo(({ item, isLiked, onLike }) => {
@@ -32,12 +34,16 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
   const handleDelete = async () => {
     try {
       await apiService.deletePost(item._id ?? item.id, cookies?.token);
+
+      toast.success("Post deleted successfully");
       // Navigate back to posts so React state is preserved and token/cookies aren't reset
       window.location.reload();
       navigate("/posts");
       console.log("Deleted and navigated back to /posts");
+      
     } catch (err) {
       console.error("Delete failed", err);
+      toast.error("Failed to delete post");
     }
   };
 
@@ -45,6 +51,11 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
     console.log("Edit post", item.id || item._id);
     navigate(`/posts/${item.id || item._id}/edit`, { state: item });
   };
+
+  const handleLike = () => {
+    console.log(`Post ${item._id || item.id} liked status:`, !isLiked);
+  };
+
   return (
     <article
       onClick={onCardClick} // make the whole card clickable
@@ -74,7 +85,7 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
           {/* Like Button */}
           <button
             type="button"
-            onClick={onLike}
+            onClick={handleLike}
             className="transition-transform hover:scale-110 active:scale-95 focus:outline-none focus:bg-gray-100 rounded-full p-1"
             aria-label={isLiked ? "Unlike post" : "Like post"}
           >

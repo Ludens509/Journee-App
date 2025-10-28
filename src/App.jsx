@@ -23,7 +23,7 @@ function App() {
     try {
      
       if ( !user && cookies.token) {
-        console.log(cookies.token);
+        // console.log(cookies.token);
         let res = await apiService.getUser(cookies.token);
 
         setUser(res);

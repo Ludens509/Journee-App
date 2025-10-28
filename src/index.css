@@ -204,6 +204,11 @@ button:hover {
   border-bottom: 1px solid #e6e6e6;
 }
 
+.scrollbar{
+  background-color: #963ab4;
+  
+}
+
 @keyframes hue-rotate {
   0% {
     filter: hue-rotate(0deg);

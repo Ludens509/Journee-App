@@ -1,12 +1,13 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 // import cardsData from "../../data";
 import CardPost from "../Card/CardPost";
-import { useUser } from "../../context/userContext";
+// import { useUser } from "../../context/userContext";
+
 
 function PaginationComponent({ data }) {
-  const { user, post } = useUser();
-  console.log("user in PaginationComponent:", user);
-  console.log("post in PaginationComponent:", post);
+  // const { user, post } = useUser();
+  // console.log("user in PaginationComponent:", user);
+  // console.log("post in PaginationComponent:", post);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
@@ -136,6 +137,7 @@ function PaginationComponent({ data }) {
           </li>
         </ul>
       </nav>
+      
     </>
   );
 }

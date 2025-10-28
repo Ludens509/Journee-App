@@ -46,7 +46,7 @@ const LayoutItem = ({ children }) => {
             </div>
           ))}
         </div>
-        <div className=" flex justify-between p-4">
+        <div className="p-4">
           <div>
             <main>{activeComponent === "postview" && children}</main>
             <main>{activeComponent === "liked" && children}</main>

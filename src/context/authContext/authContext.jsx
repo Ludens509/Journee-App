@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export default function AuthProvider({ children }) {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
-  const connStr = `http://localhost:3000/api`;
+  const connStr = `https://journee-backend.onrender.com/api`;
 
   async function signUp(formData) {
     let res = await axios.post(`${connStr}/users`, formData);

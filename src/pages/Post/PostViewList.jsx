@@ -8,10 +8,9 @@ import { useUser } from "../../context/userContext";
 import { useAuth } from "../../context/authContext/index.jsx";
 
 const PostViewList = () => {
-
- const { user, post, setPost } = useUser();
- const { cookies } = useAuth();
-//  const [ testData, setTestData ] = useState([]);
+  const { user, post, setPost } = useUser();
+  const { cookies } = useAuth();
+  //  const [ testData, setTestData ] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -20,7 +19,7 @@ const PostViewList = () => {
         const res = await axios.get(
           `https://journee-backend.onrender.com/api/posts/user/${user._id}`,
           {
-              headers: { "x-auth-token": cookies.token },
+            headers: { "x-auth-token": cookies.token },
           }
         );
 
@@ -31,11 +30,9 @@ const PostViewList = () => {
     }
 
     getData();
-    console.log("testing");
-    
+    // console.log("testing");
   }, [user, setPost, cookies?.token]);
 
- 
   // console.log("posts in PostViewList:", post);
   return (
     <>
@@ -45,7 +42,7 @@ const PostViewList = () => {
             <LayoutItem>
               <main><Outlet/></main> */}
         <PostMenu>
-          <main className="gradient--linear p-4 max-[600px]:p-2">
+          <main className="gradient--linear ">
             {/* <CardPost data={cardsData} /> */}
             {/* <span className="flex justify-center items-center mt-4"> */}
             <PaginationComponent data={post} />

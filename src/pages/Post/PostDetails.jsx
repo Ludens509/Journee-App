@@ -4,6 +4,7 @@ import AvatarProfile from "../../assets/images/profile-Avatar.jpeg";
 import MenuPosts from "../../components/MenuPosts";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import {  useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 // import axios from "axios";
 import apiService from "../../apiService/apiService.mjs";
 import { useAuth } from "../../context/authContext/index.jsx";
@@ -36,6 +37,7 @@ const PostDetail = () => {
         } catch (err) {
           console.error("Error fetching post:", err);
           setError(err.message || "Failed to load post");
+          toast.info("Failed to load post")
         } finally {
           setLoading(false);
         }

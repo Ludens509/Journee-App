@@ -43,7 +43,7 @@ const Nav = () => {
   }, [lastScrollY]);
 
   const handleLogout = () => {
-    console.log("Logout clicked");
+    // console.log("Logout clicked");
     // Add your logout logic here
     logout();
     navigate("/");

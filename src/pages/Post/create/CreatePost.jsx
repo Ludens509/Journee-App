@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/authContext/index.jsx';
 import apiService from '../../../apiService/apiService.mjs';
+import { toast } from 'react-toastify';
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -109,13 +110,15 @@ const CreatePost = () => {
       };
 
       const response = await apiService.createPost(postData,cookies.token);
-      console.log('Post created:', response);
+      // console.log('Post created:', response);
+      toast.success('Post created successfully!');
       
       // Navigate to the created post
       navigate(`/posts`, { state: response });
     } catch (err) {
       console.error('Error creating post:', err);
       setError(err.response?.data?.message || 'Failed to create post');
+      toast.error('Failed to create post');
     } finally {
       setLoading(false);
     }
