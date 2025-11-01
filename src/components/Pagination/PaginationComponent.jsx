@@ -62,7 +62,7 @@ function PaginationComponent({ data }) {
   return (
     <>
       {/* render each item as its own CardPost for better reconciliation */}
-      <div className="space-y-4">
+      <div className="space-y-4 px-2">
         {currentItems.length > 0 ? (
           <CardPost data={currentItems} />
         ) : (

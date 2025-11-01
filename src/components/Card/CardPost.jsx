@@ -60,7 +60,7 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
     <article
       onClick={onCardClick} // make the whole card clickable
       aria-label={` View details post ${item.title}`} //Defines a string value that labels the current element.
-      className="relative bg-white/70 rounded-xl border border-gray-200/50 dark:border-gray-700/20 shadow-sm hover:shadow-xl hover:ring-2 ring-ring-purple transition-all duration-300 ease-out w-full p-6 my-4 cursor-pointer" // adding this property for blur backdrop-blur-xs
+      className="relative bg-white/70 rounded-xl border border-gray-200/50 dark:border-gray-700/20 shadow-sm hover:shadow-xl hover:ring-2 ring-ring-purple transition-all duration-300 ease-out w-full p-8 my-4 cursor-pointer" // adding this property for blur backdrop-blur-xs
     >
       {/* Header Section */}
       <header className="mb-4">
