@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Nav from "../Navbar/Nav";
+import Footer from "../Footer/Footer";
 import { ToastContainer } from "react-toastify";
 
 function Layout() {
@@ -9,9 +10,15 @@ function Layout() {
         <header>
           <Nav />
         </header>
+
         <main className=" mt-12">
           <Outlet />
         </main>
+
+        <div className="mt-12">
+          <Footer />
+        </div>
+        
         <div>
           <ToastContainer
             position="top-center"
