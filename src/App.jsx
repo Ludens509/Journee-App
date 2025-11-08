@@ -13,6 +13,7 @@ import PostDetails from "./pages/Post/PostDetails";
 import PostEditView from "./pages/Post/PostEditView.jsx";
 import PostViewList from "./pages/Post/PostViewList";
 import CreatePost from "./pages/Post/create/CreatePost.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 
 function App() {
@@ -58,6 +59,8 @@ function App() {
           <Route path={""} element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<AuthPage />} />
+            {/* 👇 Only match when no other routes match*/}
+            <Route path="*" element={<NotFoundPage />} />
         {/* ----------------------------------------------- */}
             <Route element={<ProtectedRoutes />}>
 
