@@ -62,7 +62,7 @@
   background-image: linear-gradient(200deg, #d6bae4, transparent 40%);
   background-repeat: no-repeat;
   width: -moz-fit-content;
-  width: fit-content;
+  width: 100%;
 }
 h1 {
   font-size: 24px;
