@@ -15,10 +15,10 @@ function Layout() {
           <Outlet />
         </main>
 
-        <div className="mt-12">
+        <div className="mt-auto">
           <Footer />
         </div>
-        
+
         <div>
           <ToastContainer
             position="top-center"
