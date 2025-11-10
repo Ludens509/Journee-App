@@ -188,7 +188,7 @@ const Nav = () => {
                     <ul className="flex items-center gap-6 text-sm">
                       <li>
                         <Link
-                          href="#about"
+                          to="/about"
                           className="text-purple-900/80 font-medium transition hover:text-purple-900 hover:scale-105 transform"
                         >
                           About

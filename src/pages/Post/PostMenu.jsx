@@ -3,7 +3,7 @@ import LayoutItem from "../../components/layouts/LayoutItem";
 const PostMenu = ({ children}) => {
   return (
     <>
-      <section className=" md:px-[4vw] w-full  pt-16 max-[760px]:px-[2vw] max-[460px]:px-[2vw] max-[760px]:p-0 px-[16vw] ">
+      <section className=" md:px-[4vw] w-full  pt-16 max-[760px]:px-[2vw] max-[460px]:px-[2vw] max-[760px]:p-0 px-[16vw] sm:pt-16">
         <div className="flex flex-row  w-full h-full">
           <div className="flex-2 min-w-0 md:p-4 p-0">
             {/* //This layout contain the  main  content of the page list of posts

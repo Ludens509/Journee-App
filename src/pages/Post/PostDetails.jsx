@@ -16,13 +16,12 @@ const PostDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log("Post ID:", id);
-  console.log("Location:", location);
+  
   const [post, setPost] = useState(location.state ?? null);
   const [loading, setLoading] = useState(!location.state);
   const [error, setError] = useState(null);
 
-  console.log("data",post);
+ 
  
  useEffect(() => {
     // Only fetch if we don't have post data
@@ -89,6 +88,7 @@ const PostDetail = () => {
 
   return (
     <>
+    <section className="min-h-screen">
       <section className="flex flex-col px-[15vw] pt-8 poppins-regular w-full sm:px-4 sm:justify-center leading-9">
         <div className="ourwork-h1 pt-8 xm:w-full">
           <h1 className="font-bold font-sans text-2xl">{post.title}</h1>
@@ -113,7 +113,7 @@ const PostDetail = () => {
         </div>
       </section>
 
-      <section className="flex py-4 px-[15vw] justify-center items-center leading-7 sm:px-4">
+      <div className="flex py-4 px-[15vw] justify-center items-center leading-7 sm:px-4">
         <div className="w-full">
           {/* Featured image if available */}
           {post.image && (
@@ -129,6 +129,7 @@ const PostDetail = () => {
             {stripHtml(post.content)}
           </p>
         </div>
+      </div>
       </section>
     </>
   );
