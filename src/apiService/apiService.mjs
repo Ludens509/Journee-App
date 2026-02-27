@@ -1,6 +1,7 @@
 import axios from "axios";
 
 let baseURL = `https://journee-backend.onrender.com/api`;
+// let baseURL = `http://localhost:3000/api`; // Change to local for development
 
 async function getUser(token) {
   let res = await axios.get(`${baseURL}/auth`, {
@@ -41,4 +42,12 @@ async function deletePost(id, token) {
   return res.data;
 }
 
-export default { getUser, getPostById, createPost, updatePost, deletePost };
+async function likePost(id, token) {
+  const res = await axios.post(`${baseURL}/posts/${id}/like`, {}, {
+    headers: { "x-auth-token": token },
+  });
+
+  return res.data;
+}
+
+export default { getUser, getPostById, createPost, updatePost, deletePost, likePost };

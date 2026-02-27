@@ -91,7 +91,7 @@ function Home() {
         <div className="block--container">
           <div className="flex px-5 py-10 my-10 mx-auto space-y-0 sm:flex-col">
             {/* Left Content */}
-            <div className="flex-1 ml-8 space-y-10 w-2/2 sm:w-full sm:ml-2">
+            <div className="flex-1 ml-8 space-y-10 w-2/2 sm:w-full md:ml-2">
               {/* Badge - animated */}
 
               {/* Title - animated */}
@@ -201,7 +201,7 @@ function Home() {
             </p>
 
             {/* Stats or Features */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
+            <div className="grid sm:grid-cols-1 grid-cols-3 gap-8 pt-8">
               <div className="space-y-2">
                 <div className="text-4xl font-bold text-white">∞</div>
                 <div className="text-white text-opacity-90">

@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useState, useEffect } from "react";
 import OptionsMenu from "../Popover/OptionMenu";
 import { HeartFilled, HeartOutline } from "./utils";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +53,18 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
   };
 
   const handleLike = () => {
-    console.log(`Post ${item._id || item.id} liked status:`, !isLiked);
+    onLike(); // Update local state
+  };
+
+  const handleLikeClick = async () => {
+    try {
+      await apiService.likePost(item._id || item.id, cookies?.token);
+      handleLike(); // Toggle local state after successful API call
+      toast.success(isLiked ? "Post unliked" : "Post liked");
+    } catch (err) {
+      console.error("Like failed", err);
+      toast.error("Failed to update like status");
+    }
   };
 
   return (
@@ -85,7 +96,7 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
           {/* Like Button */}
           <button
             type="button"
-            onClick={handleLike}
+            onClick={handleLikeClick}
             className="transition-transform hover:scale-110 active:scale-95 focus:outline-none focus:bg-gray-100 rounded-full p-1"
             aria-label={isLiked ? "Unlike post" : "Like post"}
           >
@@ -132,14 +143,27 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
 const CardPost = ({ data }) => {
   const [likedPosts, setLikedPosts] = useState({});
 
-  const handleLike = useCallback((id) => {
-    //useCallback will return a memoized version of the callback that only changes if one of the inputs has changed.
-    //prev is the previous like post state(current liked posts object)
+  // Initialize liked posts from backend data on component mount
+  const initializeLikedPosts = useCallback(() => {
+    const initialLikes = {};
+    data.forEach((post) => {
+      const postId = post._id || post.id;
+      initialLikes[postId] = post.isActive || false; // Read isActive from backend
+    });
+    setLikedPosts(initialLikes);
+  }, [data]);
+
+   const handleLike = useCallback((id) => {
     setLikedPosts((prev) => ({
-      ...prev, //spread operator ,copy all existing liked posts
-      [id]: !prev[id], //Toggle this specific post
+      ...prev,
+      [id]: !prev[id],
     }));
   }, []);
+
+  // Initialize liked posts when data changes
+  useEffect(() => {
+    initializeLikedPosts();
+  }, [data, initializeLikedPosts]);
 
   if (!data.length) {
     return (
