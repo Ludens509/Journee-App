@@ -183,7 +183,7 @@ const CardPost = ({ data }) => {
   return (
     <>
     
-      <section className="space-y-4">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((item, idx) => (
           <PostCard
             key={item._id ?? item.id ?? idx}

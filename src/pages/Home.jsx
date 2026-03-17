@@ -89,9 +89,9 @@ function Home() {
     <>
       <section ref={heroRef} className="">
         <div className="block--container">
-          <div className="flex px-5 py-10 my-10 mx-auto space-y-0 sm:flex-col">
+          <div className="flex flex-col sm:flex-row px-5 py-10 my-10 mx-auto">
             {/* Left Content */}
-            <div className="flex-1 ml-8 space-y-10 w-2/2 sm:w-full md:ml-2">
+            <div className="flex-1 ml-0 sm:ml-8 space-y-10 w-full">
               {/* Badge - animated */}
 
               {/* Title - animated */}
@@ -144,8 +144,8 @@ function Home() {
             </div>
 
             {/* Right - Spline */}
-            <div className="relative flex-1 xm:w-full xm:mt-4 xm:mb-4 xm:ml-2">
-              <div className="spline absolute top-[8%] right-[-3%] sm:hidden sm:flex-row sm:relative">
+            <div className="relative flex-1 sm:w-full sm:mt-4 sm:mb-4 sm:ml-2">
+              <div className="spline relative sm:absolute sm:top-[8%] sm:right-[-3%]">
 
                 <Suspense fallback={<div className="w-[500px] h-[400px] bg-[#f7f3fa] rounded-xl animate-pulse" />}>
                   <Spline
@@ -201,7 +201,7 @@ function Home() {
             </p>
 
             {/* Stats or Features */}
-            <div className="grid sm:grid-cols-1 grid-cols-3 gap-8 pt-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
               <div className="space-y-2">
                 <div className="text-4xl font-bold text-white">∞</div>
                 <div className="text-white text-opacity-90">
@@ -245,7 +245,7 @@ function Home() {
           </div>
 
           {/* Feature Grid */}
-          <div className="grid grid-cols-3 gap-8 sm:grid-cols-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
             <div className="card p-8 rounded-2xl bg-gradient-to-br from-[#f9f7fb] to-white border-2 border-transparent hover:border-[#d6bae4] transition-all hover:shadow-xl">
               <div className="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
