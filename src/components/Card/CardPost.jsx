@@ -83,7 +83,7 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
         </p>
       </header>
 
-      {/* Footer Section */}
+      {/* Footer card Section */}
       <footer className="flex items-center justify-between py-3 border-t border-gray-200/50 dark:border-gray-700/50">
         <time className="text-sm text-gray-500 dark:text-gray-400">
           {item.createdAt.slice(0, 10)}
@@ -101,12 +101,12 @@ const PostCard = memo(({ item, isLiked, onLike }) => {
             aria-label={isLiked ? "Unlike post" : "Like post"}
           >
             {isLiked ? (
-              <HeartFilled size={24} className="drop-shadow-sm "  />
-            ) : (
+              
               <HeartOutline
                 size={24}
-                className="text-gray-600 dark:text-gray-600 fill-red-500"
-              />
+                className="text-gray-600 dark:text-gray-600"/>
+            ) : (
+              <HeartFilled size={24} className="drop-shadow-sm fill-red-500"/>
             )}
           </button>
 
@@ -160,7 +160,7 @@ const CardPost = ({ data }) => {
     }));
   }, []);
 
-  // Initialize liked posts when data changes
+  // Initialize liked posts when data Fchanges
   useEffect(() => {
     initializeLikedPosts();
   }, [data, initializeLikedPosts]);
@@ -182,6 +182,7 @@ const CardPost = ({ data }) => {
 
   return (
     <>
+    
       <section className="space-y-4">
         {data.map((item, idx) => (
           <PostCard

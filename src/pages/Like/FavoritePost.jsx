@@ -1,15 +1,231 @@
 // import LayoutItem from "../../Components/Layouts/LayoutItem"
 import PostMenu from "../Post/PostMenu";
 
+import { memo, useCallback, useState, useEffect, useMemo } from "react";
+import OptionsMenu from "../../components/Popover/OptionMenu";
+import { HeartFilled, HeartOutline } from "../../components/Card/utils";
+import { useNavigate } from "react-router-dom";
+import apiService from "../../apiService/apiService.mjs";
+import { stripHtml } from "../../utils";
+import { useAuth } from "../../context/authContext/index.jsx";
+import axios from "axios";
+import { useUser } from "../../context/userContext/index.jsx";
+import { toast } from "react-toastify";
+
+const PostCard = memo(({ item, isLiked, onLike }) => {
+  const navigate = useNavigate();
+  const { cookies } = useAuth();
+
+  const onCardClick = () => {
+    navigate(`/posts/${item.id || item._id}`, { state: item });
+  };
+
+  const icon = (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="text-gray-800 dark:text-gray-400"
+    >
+      <circle cx="12" cy="5" r="2" />
+      <circle cx="12" cy="12" r="2" />
+      <circle cx="12" cy="19" r="2" />
+    </svg>
+  );
+
+  const handleDelete = async () => {
+    try {
+      await apiService.deletePost(item._id ?? item.id, cookies?.token);
+
+      toast.success("Post deleted successfully");
+      // Navigate back to posts so React state is preserved and token/cookies aren't reset
+      window.location.reload();
+      navigate("/posts");
+      console.log("Deleted and navigated back to /posts");
+    } catch (err) {
+      console.error("Delete failed", err);
+      toast.error("Failed to delete post");
+    }
+  };
+
+  const handleEdit = (item) => {
+    console.log("Edit post", item.id || item._id);
+    navigate(`/posts/${item.id || item._id}/edit`, { state: item });
+  };
+
+  const handleLike = () => {
+    onLike(); // Update local state
+  };
+
+  const handleLikeClick = async () => {
+    try {
+      await apiService.likePost(item._id || item.id, cookies?.token);
+      handleLike(); // Toggle local state after successful API call
+      toast.success(isLiked ? "Post unliked" : "Post liked");
+    } catch (err) {
+      console.error("Like failed", err);
+      toast.error("Failed to update like status");
+    }
+  };
+
+  return (
+    <article
+      onClick={onCardClick} // make the whole card clickable
+      aria-label={` View details post ${item.title}`} //Defines a string value that labels the current element.
+      className="relative bg-white/70 rounded-xl border border-gray-200/50 dark:border-gray-700/20 shadow-sm hover:shadow-xl hover:ring-2 ring-ring-purple transition-all duration-300 ease-out w-full p-8 my-4 cursor-pointer" // adding this property for blur backdrop-blur-xs
+    >
+      {/* Header Section */}
+      <header className="mb-4">
+        <h2 className="text-2xl sm:text-xl font-bold tracking-tight text-gray-900  mb-2">
+          {item.title}
+        </h2>
+        <p className="font-normal text-gray-900 dark:text-gray-400 text-sm leading-relaxed  sm:block line-clamp-2">
+          {stripHtml(item.content || "").slice(0, 200)}
+        </p>
+      </header>
+
+      {/* Footer card Section */}
+      <footer className="flex items-center justify-between py-3 border-t border-gray-200/50 dark:border-gray-700/50">
+        <time className="text-sm text-gray-500 dark:text-gray-400">
+          {item.createdAt.slice(0, 10)}
+        </time>
+
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-4"
+        >
+          {/* Like Button */}
+          <button
+            type="button"
+            onClick={handleLikeClick}
+            className="transition-transform hover:scale-110 active:scale-95 focus:outline-none focus:bg-gray-100 rounded-full p-1"
+            aria-label={isLiked ? "Unlike post" : "Like post"}
+          >
+            {isLiked ? (
+              <HeartOutline
+                size={24}
+                className="text-gray-600 dark:text-gray-600"
+              />
+            ) : (
+              <HeartFilled size={24} className="drop-shadow-sm fill-red-500" />
+            )}
+          </button>
+
+          {/* Options Menu */}
+          <div>
+            <OptionsMenu
+              className="bg-white/70 backdrop-blur-sm text-gray-600 dark:text-gray-400"
+              icon={icon}
+              onEdit={() => handleEdit(item)}
+              onDelete={handleDelete}
+            />
+            {/*This component holds the 3 dots menu for additional post options*/}
+          </div>
+          {/*  */}
+        </div>
+      </footer>
+
+      {/* Image Section */}
+      {/* {item.image && (
+          <div className="mt-4 rounded-lg overflow-hidden">
+            <img
+              src={item.image}
+              alt={item.title || "Post image"}
+              className="w-full h-auto object-cover max-h-96"
+              loading="lazy"
+            />
+          </div>
+        )} */}
+    </article>
+  );
+});
+
+// `data` comes from user context instead of a prop so we avoid undefined errors
 const FavoritePost = () => {
+  const { user, post, setPost } = useUser();
+  const { cookies } = useAuth();
+
+  // if we haven't loaded posts yet, fetch them just like PostViewList does
+  useEffect(() => {
+    async function getData() {
+      if (!user || !cookies?.token) return;
+      // avoid refetching if we already have posts
+      if (post && post.length > 0) return;
+      try {
+        const res = await axios.get(
+          `https://journee-backend.onrender.com/api/posts/user/${user._id}`,
+          {
+            headers: { "x-auth-token": cookies.token },
+          },
+        );
+        setPost(res.data || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    getData();
+  }, [user, cookies?.token, setPost]);
+
+  // guard in case context isn't populated yet
+  const allPosts = post || [];
+  const data = useMemo(() => allPosts.filter((p) => p.isActive), [allPosts]);
+
+  const [likedPosts, setLikedPosts] = useState({});
+
+  // Initialize liked posts from backend data on component mount
+  const initializeLikedPosts = useCallback(() => {
+    const initialLikes = {};
+    data.forEach((post) => {
+      const postId = post._id || post.id;
+      initialLikes[postId] = post.isActive || false; // Read isActive from backend
+    });
+    setLikedPosts(initialLikes);
+  }, [data]);
+
+  const handleLike = useCallback((id) => {
+    setLikedPosts((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  }, []);
+
+  // Initialize liked posts when data changes
+  useEffect(() => {
+    initializeLikedPosts();
+  }, [data, initializeLikedPosts]);
+
+  if (data.length === 0) {
+    return (
+      <>
+        <PostMenu>
+          <section className="space-y-4">
+            <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+              No posts to display
+            </div>
+          </section>
+        </PostMenu>
+      </>
+    );
+  }
+
   return (
     <>
-    <PostMenu>
-      <div>Favorite</div>
-    </PostMenu>
+      <PostMenu>
+        <section className="space-y-4">
+          {data.map((item, idx) => (
+            <PostCard
+              key={item._id ?? item.id ?? idx}
+              item={item}
+              isLiked={!!likedPosts[item._id ?? item.id]}
+              onLike={() => handleLike(item._id ?? item.id)}
+            />
+          ))}
+        </section>
+      </PostMenu>
     </>
-    
-  )
-}
+  );
+};
 
 export default FavoritePost;
