@@ -4,7 +4,13 @@
 
 
 @theme {
-  --breakpoint-*: initial;
+ 
+   --breakpoint-xs: 440px;
+   --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
   --breakpoint-tablet: 40rem;
   --breakpoint-laptop: 64rem;
   --breakpoint-desktop: 80rem;
@@ -235,11 +241,11 @@ button:hover {
     width: 100%;
   }
 }
-@media screen and (max-width: 1020px) {
+/* @media screen and (max-width: 1020px) {
  .spline{
   display: none;
  }
-}
+} */
 /* @keyframes back{
   100%{
     background-position: 1000px 0;
