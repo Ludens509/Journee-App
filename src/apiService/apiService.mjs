@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// let baseURL = `https://journee-backend.onrender.com/api`;
-let baseURL = `http://localhost:3000/api`; // Change to local for development
+let baseURL = `https://journee-backend.onrender.com/api`;
 
 async function getUser(token) {
   let res = await axios.get(`${baseURL}/auth`, {
